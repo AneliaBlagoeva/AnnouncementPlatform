@@ -1,17 +1,25 @@
-package com.project.AnnouncementPlatform;
+package com.project.AnnouncementPlatform.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="announcement")
-public class Announcement {
+public class Announcement implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name="announcement_id")
 	private int anncmntId;
@@ -20,12 +28,12 @@ public class Announcement {
 	private String anncmntName;
 	
 	@Column(name="status_id")
-	@JoinColumn(name="statusId")
+	@JoinColumn(name="status_id")
 	private int statusId;
 	
-	@Column(name="anncmnt_category_id")
-	@JoinColumn(name="categoryId")
-	private int anncmntCategoryId;
+	@OneToOne (cascade=CascadeType.ALL)
+    @JoinColumn(name = "anncmnt_category_id")
+	private AnnouncementCategory category;
 	
 	@Column(name="description")
 	private String description;
@@ -58,12 +66,7 @@ public class Announcement {
 	public void setStatusId(int statusId) {
 		this.statusId = statusId;
 	}
-	public int getAnncmntCategoryId() {
-		return anncmntCategoryId;
-	}
-	public void setAnncmntCategoryId(int anncmntCategory) {
-		this.anncmntCategoryId = anncmntCategory;
-	}
+	
 	public String getDescription() {
 		return description;
 	}
@@ -85,8 +88,37 @@ public class Announcement {
 	public String getUserEmail() {
 		return userEmail;
 	}
+	
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
+	
+	
+	public AnnouncementCategory getCategory() {
+		return category;
+	}
+	public void setCategory(AnnouncementCategory category) {
+		this.category = category;
+	}
+	
+	
+	public Announcement() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Announcement(int anncmntId, String anncmntName, int statusId, AnnouncementCategory category,
+			String description, String url, Date dateCreated, String userEmail) {
+		super();
+		this.anncmntId = anncmntId;
+		this.anncmntName = anncmntName;
+		this.statusId = statusId;
+		this.category = category;
+		this.description = description;
+		this.url = url;
+		this.dateCreated = dateCreated;
+		this.userEmail = userEmail;
+	}
+	
+	
 
 }

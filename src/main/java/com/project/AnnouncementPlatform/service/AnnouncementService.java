@@ -1,7 +1,10 @@
-package com.project.AnnouncementPlatform;
+package com.project.AnnouncementPlatform.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.project.AnnouncementPlatform.domain.Announcement;
+import com.project.AnnouncementPlatform.repository.AnnouncementRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,21 +12,22 @@ import java.util.Optional;
 @Service
 public class AnnouncementService {
 	@Autowired
-    private AnnouncementRepository annRespository;
+    private AnnouncementRepository annRepository;
 
     public List<Announcement> findAll() {
-        return annRespository.findAll();
+        return annRepository.findAll();
     }
     
     public Optional<Announcement> findById(int id) {
-        return annRespository.findById(id);
+        return annRepository.findById(id);
     }
     
     public void deleteById(int id) {
-    	annRespository.deleteById(id);
+    	annRepository.deleteById(id);
     }
     
     public Announcement save(Announcement ann) {
-        return annRespository.save(ann);
+        return annRepository.save(ann);
     }
+    
 }

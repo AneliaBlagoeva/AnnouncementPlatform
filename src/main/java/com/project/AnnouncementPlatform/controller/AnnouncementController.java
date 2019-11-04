@@ -1,13 +1,18 @@
-package com.project.AnnouncementPlatform;
+package com.project.AnnouncementPlatform.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.project.AnnouncementPlatform.domain.Announcement;
+import com.project.AnnouncementPlatform.service.AnnouncementService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
@@ -26,7 +31,7 @@ public class AnnouncementController {
 		public ResponseEntity<List<Announcement>> getAnnouncements() {
 	        return ResponseEntity.ok(anncmntService.findAll());
 	    }
-		
+				
 		@GetMapping("/announcements/{id}")
 		public ResponseEntity<Announcement> getAnnouncementById(@PathVariable int id) {
 			Optional<Announcement> ann=anncmntService.findById(id);
@@ -48,5 +53,14 @@ public class AnnouncementController {
 
 		        return ResponseEntity.ok().build();
 		    }
+		
+		@PutMapping("/announcements/{id}")
+	    public ResponseEntity<Announcement> update(@PathVariable int id, @Valid @RequestBody Announcement product) {
+	        if (!anncmntService.findById(id).isPresent()) {
+	            ResponseEntity.badRequest().build();
+	        }
+
+	        return ResponseEntity.ok(anncmntService.save(product));
+	    }
 }
 
