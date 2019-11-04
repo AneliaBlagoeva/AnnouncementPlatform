@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="announcement")
 public class Announcement implements Serializable{
-	
+
 	/**
 	 * 
 	 */
@@ -27,9 +27,9 @@ public class Announcement implements Serializable{
 	@Column(name="anncmnt_name")
 	private String anncmntName;
 	
-	@Column(name="status_id")
-	@JoinColumn(name="status_id")
-	private int statusId;
+	@OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "status_id")
+	private AnnouncementStatus status;
 	
 	@OneToOne (cascade=CascadeType.ALL)
     @JoinColumn(name = "anncmnt_category_id")
@@ -60,13 +60,13 @@ public class Announcement implements Serializable{
 	public void setAnncmntName(String anncmntName) {
 		this.anncmntName = anncmntName;
 	}
-	public int getStatusId() {
-		return statusId;
-	}
-	public void setStatusId(int statusId) {
-		this.statusId = statusId;
-	}
 	
+	public AnnouncementStatus getStatus() {
+		return status;
+	}
+	public void setStatus(AnnouncementStatus status) {
+		this.status = status;
+	}
 	public String getDescription() {
 		return description;
 	}
@@ -106,12 +106,12 @@ public class Announcement implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Announcement(int anncmntId, String anncmntName, int statusId, AnnouncementCategory category,
+	public Announcement(int anncmntId, String anncmntName, AnnouncementStatus status, AnnouncementCategory category,
 			String description, String url, Date dateCreated, String userEmail) {
 		super();
 		this.anncmntId = anncmntId;
 		this.anncmntName = anncmntName;
-		this.statusId = statusId;
+		this.status = status;
 		this.category = category;
 		this.description = description;
 		this.url = url;
