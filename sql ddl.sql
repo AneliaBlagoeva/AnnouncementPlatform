@@ -1,3 +1,4 @@
+CREATE DATABASE `announcementplatform` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 CREATE TABLE `announcement` (
   `announcement_id` int(11) NOT NULL,
   `anncmnt_name` varchar(45) NOT NULL,
@@ -11,9 +12,9 @@ CREATE TABLE `announcement` (
   KEY `categoryId_idx` (`anncmnt_category_id`),
   KEY `statusId_idx` (`status_id`),
   KEY `email_idx` (`user_email`),
-  CONSTRAINT `categoryId` FOREIGN KEY (`anncmnt_category_id`) REFERENCES `announcementcategory` (`category_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `category_id` FOREIGN KEY (`anncmnt_category_id`) REFERENCES `announcementcategory` (`category_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `email` FOREIGN KEY (`user_email`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `statusId` FOREIGN KEY (`status_id`) REFERENCES `announcementstatus` (`status_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `status_id` FOREIGN KEY (`status_id`) REFERENCES `announcementstatus` (`status_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `announcementcategory` (
@@ -31,7 +32,7 @@ CREATE TABLE `announcementstatus` (
 CREATE TABLE `job` (
   `anncmnt_id` int(11) NOT NULL,
   `anncmnt_organization` varchar(45) DEFAULT NULL,
-  `candidateResponsibility` varchar(2048) DEFAULT NULL,
+  `candidate_responsibility` varchar(2048) DEFAULT NULL,
   `salary` int(11) DEFAULT NULL,
   `experience` int(11) DEFAULT NULL,
   `benefits` varchar(3000) DEFAULT NULL,

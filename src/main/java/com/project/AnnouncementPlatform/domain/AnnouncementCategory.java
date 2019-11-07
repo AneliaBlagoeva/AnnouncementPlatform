@@ -17,6 +17,7 @@ public class AnnouncementCategory {
 	@Column(name="category_name")
 	private String categoryName;
 
+	
 	public int getCategoryId() {
 		return categoryId;
 	}

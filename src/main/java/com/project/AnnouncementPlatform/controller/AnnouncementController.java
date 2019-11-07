@@ -56,11 +56,7 @@ public class AnnouncementController {
 		
 		@PutMapping("/announcements/{id}")
 	    public ResponseEntity<Announcement> update(@PathVariable int id, @Valid @RequestBody Announcement product) {
-	        if (!anncmntService.findById(id).isPresent()) {
-	            ResponseEntity.badRequest().build();
-	        }
-
-	        return ResponseEntity.ok(anncmntService.save(product));
+	            return ResponseEntity.ok(anncmntService.update(product));
 	    }
 }
 

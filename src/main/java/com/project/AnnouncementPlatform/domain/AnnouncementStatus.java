@@ -10,10 +10,10 @@ import javax.persistence.Table;
 public class AnnouncementStatus {
 @Id
 @Column(name="status_id")
-int statusId;
+private int statusId;
 
 @Column(name="status_name")
-String statusName;
+private String statusName;
 
 public int getStatusId() {
 	return statusId;
