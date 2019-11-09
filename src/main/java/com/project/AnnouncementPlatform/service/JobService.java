@@ -32,7 +32,7 @@ public class JobService {
     }
     
     public Job update(Job job) {
-    	if (!jobRepository.findById(job.getAnncmnt().getAnncmntId()).isPresent()) {
+    	if (!jobRepository.findById(job.getAnncmntID()).isPresent()) {
             ResponseEntity.badRequest().build();
         }
         return jobRepository.save(job);

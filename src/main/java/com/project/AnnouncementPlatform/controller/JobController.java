@@ -31,18 +31,18 @@ public class JobController {
         return ResponseEntity.ok(jobService.findAll());
     }
 			
-	@GetMapping("/jobs/{id}")
+	@GetMapping("/job/{id}")
 	public ResponseEntity<Job> getJobById(@PathVariable int id) {
 		Optional<Job> job=jobService.findById(id);
         return ResponseEntity.ok(job.get());
     }
 	
-	@PostMapping("/jobs")
+	@PostMapping("/job")
     public ResponseEntity<Job> create(@Valid @RequestBody Job job) {
         return ResponseEntity.ok(jobService.save(job));
     }
 	
-	@DeleteMapping("/jobs/{id}")
+	@DeleteMapping("/job/{id}")
 	    public ResponseEntity<Job> delete(@PathVariable int id) {
 	        if (!jobService.findById(id).isPresent()) {
 	            ResponseEntity.badRequest().build();
@@ -53,7 +53,7 @@ public class JobController {
 	        return ResponseEntity.ok().build();
 	    }
 	
-	@PutMapping("/jobs/{id}")
+	@PutMapping("/job/{id}")
     public ResponseEntity<Job> update(@PathVariable int id, @Valid @RequestBody Job product) {
             return ResponseEntity.ok(jobService.update(product));
     }

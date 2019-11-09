@@ -20,10 +20,18 @@ public class Job implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private int id;
+	@Column(name="anncmnt_id")
+	private int anncmntID;
 	
-	
-    @OneToOne(cascade = CascadeType.ALL)
+    public int getAnncmntID() {
+		return anncmntID;
+	}
+
+	public void setAnncmntID(int anncmntID) {
+		this.anncmntID = anncmntID;
+	}
+
+	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "anncmnt_id")
     @MapsId
 	private Announcement anncmnt;

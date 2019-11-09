@@ -6,11 +6,9 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -37,18 +35,6 @@ public class Announcement implements Serializable{
 	@JoinColumn(name = "anncmnt_category_id")
 	private AnnouncementCategory category;
 	
-	/*
-	@OneToOne(mappedBy = "anncmnt", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-	private Job job;
-	
-	public Job getJob() {
-		return job;
-	}
-	public void setJob(Job job) {
-		this.job = job;
-	}*/
-	
 	@Column(name="description")
 	private String description;
 	
@@ -59,7 +45,6 @@ public class Announcement implements Serializable{
 	private Date dateCreated;
 	
 	@Column(name="user_email")
-	@JoinColumn(name="email")
 	private String userEmail;
 	
 	public int getAnncmntId() {
@@ -115,8 +100,6 @@ public class Announcement implements Serializable{
 	public void setCategory(AnnouncementCategory category) {
 		this.category = category;
 	}
-	
-	
 	
 	public Announcement() {
 		super();
