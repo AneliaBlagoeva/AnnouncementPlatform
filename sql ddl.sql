@@ -42,8 +42,8 @@ CREATE TABLE `job` (
 
 CREATE TABLE `scholarship` (
   `anncmnt_id` int(11) NOT NULL,
-  `min_grade` decimal(2,0) DEFAULT NULL,
-  `scholarship_award` decimal(2,0) DEFAULT NULL,
+  `min_grade` decimal(3,2) DEFAULT NULL,
+  `scholarship_award` decimal(8,2) DEFAULT NULL,
   `requirements` varchar(5000) DEFAULT NULL,
   `program_allowed` varchar(2048) DEFAULT NULL,
   `university_allowed` varchar(2048) DEFAULT NULL,
@@ -74,7 +74,7 @@ CREATE TABLE `userjobattributes` (
 
 CREATE TABLE `userschoralshipattributes` (
   `user_email` varchar(45) NOT NULL,
-  `grade` decimal(2,0) DEFAULT NULL,
+  `grade` decimal(3,2) DEFAULT NULL,
   `degree` varchar(45) DEFAULT NULL,
   `university` varchar(45) DEFAULT NULL,
   `program` varchar(45) DEFAULT NULL,
