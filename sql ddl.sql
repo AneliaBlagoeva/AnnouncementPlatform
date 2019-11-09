@@ -47,6 +47,8 @@ CREATE TABLE `scholarship` (
   `requirements` varchar(5000) DEFAULT NULL,
   `program_allowed` varchar(2048) DEFAULT NULL,
   `university_allowed` varchar(2048) DEFAULT NULL,
+  `year_allowed` int(11) DEFAULT NULL,
+  `degree_allowed` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`anncmnt_id`),
   CONSTRAINT `scholarshipId` FOREIGN KEY (`anncmnt_id`) REFERENCES `announcement` (`announcement_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
