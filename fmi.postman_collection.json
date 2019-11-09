@@ -1,0 +1,175 @@
+{
+	"info": {
+		"_postman_id": "8bf0cfd7-60f1-4149-94d8-1f52ffde2484",
+		"name": "fmi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST JOB",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"anncmntID\": 4,\r\n        \"anncmnt\": {\r\n            \"anncmntId\": 4,\r\n            \"anncmntName\": \"Javascript Developer\",\r\n            \"status\": {\r\n                \"statusId\": 1,\r\n                \"statusName\": \"Активна\"\r\n            },\r\n            \"category\": {\r\n                \"categoryId\": 1,\r\n                \"categoryName\": \"Работа\"\r\n            },\r\n            \"description\": \"bla bla\",\r\n            \"url\": \"www.jobs.bg\",\r\n            \"dateCreated\": \"2017-06-14T21:00:00.000+0000\",\r\n            \"userEmail\": \"ani@mail.bg\"\r\n        },\r\n        \"anncmntOrganization\": \"Datamax\",\r\n        \"candidateResponsibility\": \"Develop software products\",\r\n        \"salary\": 1000,\r\n        \"experiance\": 1,\r\n        \"benefits\": \"Bonuses\",\r\n        \"requirements\": \"Bachelor degree of Computer science\"\r\n    }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/job/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"job",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET JOBS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/jobs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"jobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET  SCHPS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/scholarships",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"scholarships"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET VLNTS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/voluntarinesses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"voluntarinesses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST VLNTS",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"anncmntID\": 3,\r\n        \"anncmnt\": {\r\n            \"anncmntId\": 3,\r\n            \"anncmntName\": \"For FMI\",\r\n            \"status\": {\r\n                \"statusId\": 1,\r\n                \"statusName\": \"Активна\"\r\n            },\r\n            \"category\": {\r\n                \"categoryId\": 3,\r\n                \"categoryName\": \"Благотворителност\"\r\n            },\r\n            \"description\": \"bla bla\",\r\n            \"url\": \"www.fmi.bg\",\r\n            \"dateCreated\": \"2017-07-15T21:00:00.000+0000\",\r\n            \"userEmail\": \"ani@mail.bg\"\r\n        },\r\n        \"anncmntOrganization\": \"Парти с кауза\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/voluntariness/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"voluntariness",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST SCHPS",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"anncmntID\": 2,\r\n        \"anncmnt\": {\r\n            \"anncmntId\": 2,\r\n            \"anncmntName\": \"Euro scholarship\",\r\n            \"status\": {\r\n                \"statusId\": 1,\r\n                \"statusName\": \"Активна\"\r\n            },\r\n            \"category\": {\r\n                \"categoryId\": 2,\r\n                \"categoryName\": \"Стипендия\"\r\n            },\r\n            \"description\": \"bla bla\",\r\n            \"url\": \"www.eurostipendii.bg\",\r\n            \"dateCreated\": \"2017-07-15T21:00:00.000+0000\",\r\n            \"userEmail\": \"ani@mail.bg\"\r\n        },\r\n        \"minGrade\": \"5.50\",\r\n        \"scholarshipAward\":\"1000\",\r\n        \"requirements\": \"3rd maximum year, bachalor degree\",\r\n        \"programAllowed\":\"Information systems, software engineers\",\r\n        \"universityAllowed\":\"FMI\",\r\n        \"yearAllowed\":3,\r\n        \"degreeAllowed\":\"bachelor\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/scholarship/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"scholarship",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
