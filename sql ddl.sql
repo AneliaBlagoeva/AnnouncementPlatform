@@ -1,3 +1,4 @@
+CREATE DATABASE `announcementplatform` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 CREATE TABLE `announcement` (
   `announcement_id` int(11) NOT NULL,
   `anncmnt_name` varchar(45) NOT NULL,
@@ -42,20 +43,16 @@ CREATE TABLE `job` (
 
 CREATE TABLE `scholarship` (
   `anncmnt_id` int(11) NOT NULL,
-  `min_grade` decimal(3,2) DEFAULT NULL,
-  `scholarship_award` decimal(8,2) DEFAULT NULL,
+  `min_grade` decimal(2,0) DEFAULT NULL,
+  `scholarship_award` decimal(2,0) DEFAULT NULL,
   `requirements` varchar(5000) DEFAULT NULL,
-  `program_allowed` varchar(2048) DEFAULT NULL,
-  `university_allowed` varchar(2048) DEFAULT NULL,
-  `year_allowed` int(11) DEFAULT NULL,
-  `degree_allowed` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`anncmnt_id`),
   CONSTRAINT `scholarshipId` FOREIGN KEY (`anncmnt_id`) REFERENCES `announcement` (`announcement_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `user` (
   `first_name` varchar(45) NOT NULL,
-  `last_name` varchar(45) NOT NULL,
+  `lastName` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `age` smallint(99) DEFAULT NULL,
   `city` varchar(45) DEFAULT NULL,
@@ -65,7 +62,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `userjobattributes` (
-  `skills` varchar(1024) NOT NULL,
+  `skills` int(11) NOT NULL,
   `experience` int(11) DEFAULT NULL,
   `user_email` varchar(45) DEFAULT NULL,
   KEY `email_idx` (`user_email`),
@@ -74,7 +71,7 @@ CREATE TABLE `userjobattributes` (
 
 CREATE TABLE `userschoralshipattributes` (
   `user_email` varchar(45) NOT NULL,
-  `grade` decimal(3,2) DEFAULT NULL,
+  `grade` int(11) DEFAULT NULL,
   `degree` varchar(45) DEFAULT NULL,
   `university` varchar(45) DEFAULT NULL,
   `program` varchar(45) DEFAULT NULL,
