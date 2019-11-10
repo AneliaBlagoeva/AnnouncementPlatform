@@ -20,7 +20,7 @@ import com.project.AnnouncementPlatform.domain.Job;
 import com.project.AnnouncementPlatform.service.JobService;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 public class JobController {
 	
 	@Autowired

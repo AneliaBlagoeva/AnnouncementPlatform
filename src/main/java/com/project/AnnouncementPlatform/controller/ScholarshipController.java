@@ -20,7 +20,7 @@ import com.project.AnnouncementPlatform.domain.Scholarship;
 import com.project.AnnouncementPlatform.service.ScholarshipService;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 public class ScholarshipController {
 	
 	@Autowired

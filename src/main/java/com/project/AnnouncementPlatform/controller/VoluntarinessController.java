@@ -20,7 +20,7 @@ import com.project.AnnouncementPlatform.domain.Voluntariness;
 import com.project.AnnouncementPlatform.service.VoluntarinessService;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 public class VoluntarinessController {
 	
 	@Autowired

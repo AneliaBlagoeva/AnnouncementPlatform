@@ -20,7 +20,7 @@ import com.project.AnnouncementPlatform.domain.UserSchoralshipAttributes;
 import com.project.AnnouncementPlatform.service.UserSchoralshipAttributesService;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 public class UserSchoralshipAttributesController {
 	
 	@Autowired
