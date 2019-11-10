@@ -176,13 +176,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/userJobAttributes",
+					"raw": "http://localhost:8080/api/userJobAttributes",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
+						"api",
 						"userJobAttributes"
 					]
 				}
@@ -195,13 +196,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/userSchoralshipAttributes",
+					"raw": "http://localhost:8080/api/userSchoralshipAttributes",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
+						"api",
 						"userSchoralshipAttributes"
 					]
 				}
@@ -230,13 +232,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/userSchoralshipAttributes/1",
+					"raw": "http://localhost:8080/api/userSchoralshipAttributes/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
+						"api",
 						"userSchoralshipAttributes",
 						"1"
 					]
@@ -266,13 +269,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/userJobAttributes/1",
+					"raw": "http://localhost:8080/api/userJobAttributes/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
+						"api",
 						"userJobAttributes",
 						"1"
 					]
