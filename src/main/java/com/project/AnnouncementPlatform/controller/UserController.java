@@ -17,51 +17,51 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.AnnouncementPlatform.domain.Scholarship;
-import com.project.AnnouncementPlatform.service.ScholarshipService;
+import com.project.AnnouncementPlatform.domain.User;
+import com.project.AnnouncementPlatform.service.UserService;
 
 @RestController
 @RequestMapping("/api")
-public class ScholarshipController {
+public class UserController {
 	
 	@Autowired
-	private ScholarshipService scholarshipService;
+	private UserService userService;
 	
-	@GetMapping("/scholarships")
+	@GetMapping("/users")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<List<Scholarship>> getScholarships() {
-        return ResponseEntity.ok(scholarshipService.findAll());
+	public ResponseEntity<List<User>> getUsers() {
+        return ResponseEntity.ok(userService.findAll());
     }
 			
-	@GetMapping("/scholarship/{id}")
+	@GetMapping("/user/{email}")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<Scholarship> getScholarshipById(@PathVariable int id) {
-		Optional<Scholarship> scholarship=scholarshipService.findById(id);
-        return ResponseEntity.ok(scholarship.get());
+	public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
+		Optional<User> user=userService.findById(email);
+        return ResponseEntity.ok(user.get());
     }
 	
-	@PostMapping("/scholarship")
+	@PostMapping("/user")
 	@CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity<Scholarship> create(@Valid @RequestBody Scholarship scholarship) {
-        return ResponseEntity.ok(scholarshipService.save(scholarship));
+    public ResponseEntity<User> create(@Valid @RequestBody User user) {
+        return ResponseEntity.ok(userService.save(user));
     }
 	
-	@DeleteMapping("/scholarship/{id}")
+	@DeleteMapping("/user/{email}")
 	@CrossOrigin(origins = "http://localhost:4200")
-	    public ResponseEntity<Scholarship> delete(@PathVariable int id) {
-	        if (!scholarshipService.findById(id).isPresent()) {
+	    public ResponseEntity<User> delete(@PathVariable String email) {
+	        if (!userService.findById(email).isPresent()) {
 	            ResponseEntity.badRequest().build();
 	        }
 
-	        scholarshipService.deleteById(id);
+	        userService.deleteById(email);
 
 	        return ResponseEntity.ok().build();
 	    }
 	
-	@PutMapping("/scholarship/{id}")
+	@PutMapping("/user/{email}")
 	@CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity<Scholarship> update(@PathVariable int id, @Valid @RequestBody Scholarship product) {
-            return ResponseEntity.ok(scholarshipService.update(product));
+    public ResponseEntity<User> update(@PathVariable int id, @Valid @RequestBody User product) {
+            return ResponseEntity.ok(userService.update(product));
     }
 	
 

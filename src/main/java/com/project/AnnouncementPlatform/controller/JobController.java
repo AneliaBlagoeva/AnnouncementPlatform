@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,22 +28,26 @@ public class JobController {
 	private JobService jobService;
 	
 	@GetMapping("/jobs")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<List<Job>> getJobs() {
         return ResponseEntity.ok(jobService.findAll());
     }
 			
 	@GetMapping("/job/{id}")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<Job> getJobById(@PathVariable int id) {
 		Optional<Job> job=jobService.findById(id);
         return ResponseEntity.ok(job.get());
     }
 	
 	@PostMapping("/job")
+	@CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<Job> create(@Valid @RequestBody Job job) {
         return ResponseEntity.ok(jobService.save(job));
     }
 	
 	@DeleteMapping("/job/{id}")
+	@CrossOrigin(origins = "http://localhost:4200")
 	    public ResponseEntity<Job> delete(@PathVariable int id) {
 	        if (!jobService.findById(id).isPresent()) {
 	            ResponseEntity.badRequest().build();
@@ -54,6 +59,7 @@ public class JobController {
 	    }
 	
 	@PutMapping("/job/{id}")
+	@CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<Job> update(@PathVariable int id, @Valid @RequestBody Job product) {
             return ResponseEntity.ok(jobService.update(product));
     }

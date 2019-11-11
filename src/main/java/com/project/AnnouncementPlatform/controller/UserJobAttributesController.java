@@ -34,30 +34,34 @@ public class UserJobAttributesController {
         return ResponseEntity.ok(userJobAttributesService.findAll());
     }
 			
-	@GetMapping("/userJobAttributes/{id}")
-	public ResponseEntity<UserJobAttributes> getUserJobAttributesById(@PathVariable String id) {
-		Optional<UserJobAttributes> userJobAttributes=userJobAttributesService.findById(id);
+	@GetMapping("/userJobAttributes/{email}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<UserJobAttributes> getUserJobAttributesById(@PathVariable String email) {
+		Optional<UserJobAttributes> userJobAttributes=userJobAttributesService.findById(email);
         return ResponseEntity.ok(userJobAttributes.get());
     }
 	
 	@PostMapping("/userJobAttributes")
+	@CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<UserJobAttributes> create(@Valid @RequestBody UserJobAttributes userJobAttributes) {
         return ResponseEntity.ok(userJobAttributesService.save(userJobAttributes));
     }
 	
-	@DeleteMapping("/userJobAttributes/{id}")
-	    public ResponseEntity<UserJobAttributes> delete(@PathVariable String id) {
-	        if (!userJobAttributesService.findById(id).isPresent()) {
+	@DeleteMapping("/userJobAttributes/{email}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	    public ResponseEntity<UserJobAttributes> delete(@PathVariable String email) {
+	        if (!userJobAttributesService.findById(email).isPresent()) {
 	            ResponseEntity.badRequest().build();
 	        }
 
-	        userJobAttributesService.deleteById(id);
+	        userJobAttributesService.deleteById(email);
 
 	        return ResponseEntity.ok().build();
 	    }
 	
-	@PutMapping("/userJobAttributes/{id}")
-    public ResponseEntity<UserJobAttributes> update(@PathVariable String id, @Valid @RequestBody UserJobAttributes product) {
+	@PutMapping("/userJobAttributes/{email}")
+	@CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity<UserJobAttributes> update(@PathVariable String email, @Valid @RequestBody UserJobAttributes product) {
             return ResponseEntity.ok(userJobAttributesService.update(product));
     }
 }
