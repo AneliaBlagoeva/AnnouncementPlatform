@@ -3,9 +3,9 @@ package com.project.AnnouncementPlatform.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.project.AnnouncementPlatform.domain.User;
+import com.project.AnnouncementPlatform.domain.Role;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, String>{
-	User findByEmail(String email);
+public interface RoleRepository extends JpaRepository<Role, Integer>{
+	Role findById(int roleId);
 }
