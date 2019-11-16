@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.AnnouncementPlatform.config.JwtTokenProvider;
@@ -42,8 +43,7 @@ public class AuthController {
     @Autowired
     private CustomUserDetailsService userService;
 
-    @SuppressWarnings("rawtypes")
-    @PostMapping("/login")
+    @RequestMapping (value="/login", produces="application/json", method= {RequestMethod.POST, RequestMethod.GET})
     public ResponseEntity login(@RequestBody AuthBody data) {
         try {
             String username = data.getEmail();
@@ -61,7 +61,8 @@ public class AuthController {
     }
 
     @SuppressWarnings("rawtypes")
-    @PostMapping("/register")
+    @RequestMapping (value="/register", produces="application/json", method= RequestMethod.POST)
+    @CrossOrigin(origins = "http://localhost:4200", allowedHeaders="*")
     public ResponseEntity register(@RequestBody User user) {
         User userExists = userService.findUserByEmail(user.getEmail());
         if (userExists != null) {

@@ -35,7 +35,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     public void saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-
+        System.out.print(user.getPassword());
 
         //1 ADMIN in db
         Role userRole = roleRepository.findById(1);

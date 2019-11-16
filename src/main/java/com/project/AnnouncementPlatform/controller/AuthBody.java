@@ -1,5 +1,8 @@
 package com.project.AnnouncementPlatform.controller;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class AuthBody {
 
     private String email;
