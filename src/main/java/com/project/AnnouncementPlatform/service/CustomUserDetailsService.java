@@ -17,6 +17,8 @@ import com.project.AnnouncementPlatform.domain.User;
 import com.project.AnnouncementPlatform.repository.RoleRepository;
 import com.project.AnnouncementPlatform.repository.UserRepository;
 
+import java.util.Optional;
+
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
@@ -37,9 +39,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         System.out.print(user.getPassword());
 
-        //1 ADMIN in db
-        Role userRole = roleRepository.findById(1);
-        user.setRole(userRole);
+        // 1 ADMIN in db
+        Optional<Role> userRole = roleRepository.findById("USER");
+        user.setRole(userRole.get());
         userRepository.save(user);
     }
 
@@ -47,7 +49,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
         User user = userRepository.findByEmail(email);
-        if(user != null) {
+        if (user != null) {
             List<GrantedAuthority> authorities = getUserAuthority(user.getRole());
             return buildUserForAuthentication(user, authorities);
         } else {
@@ -56,7 +58,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     private List<GrantedAuthority> getUserAuthority(Role userRole) {
-        GrantedAuthority role=new SimpleGrantedAuthority(Integer.toString(userRole.getId()));
+        GrantedAuthority role = new SimpleGrantedAuthority(userRole.getDescription());
 
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         grantedAuthorities.add(role);

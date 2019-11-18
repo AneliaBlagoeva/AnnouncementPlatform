@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import com.project.AnnouncementPlatform.config.JwtConfigurer;
 import com.project.AnnouncementPlatform.config.JwtTokenFilter;
 import com.project.AnnouncementPlatform.config.JwtTokenProvider;
 import com.project.AnnouncementPlatform.service.CustomUserDetailsService;
@@ -23,41 +24,32 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	@Autowired
+    @Autowired
     CustomUserDetailsService userDetailsService;
-	
+
     @Autowired
     JwtTokenProvider jwtTokenProvider;
 
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(bCryptPasswordEncoder());
+        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors()
-        .and()
-        .csrf().disable()
-        .authorizeRequests().anyRequest().permitAll()
-        //.authorizeRequests()
-        //.antMatchers("/api/auth/**").permitAll()
-        //.antMatchers("/api/userJobAttributes").permitAll()
-                //.antMatchers("/api/userJobAttributes").hasAuthority("ADMIN").anyRequest().authenticated()
-        .and()
-        .exceptionHandling()
-        .authenticationEntryPoint(unauthorizedEntryPoint())
-        .and()
-        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        //.apply(new JwtConfigurer(jwtTokenProvider));
+        http.cors().and().csrf().disable()
+                // .authorizeRequests().anyRequest().permitAll()
+                .authorizeRequests().antMatchers("/api/auth/**").permitAll()
+                // .antMatchers("/api/userJobAttributes").permitAll()
+                .antMatchers("/api/userJobAttributes").hasAuthority("ADMIN").anyRequest().authenticated().and()
+                .exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint()).and().sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .apply(new JwtConfigurer(jwtTokenProvider));
 
-        http.addFilterBefore(authenticationJwtTokenFilter(),  UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
@@ -75,10 +67,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-    
+
     @Bean
     public JwtTokenFilter authenticationJwtTokenFilter() {
-    	return new JwtTokenFilter(jwtTokenProvider);
+        return new JwtTokenFilter(jwtTokenProvider);
     }
 
     @Bean

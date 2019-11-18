@@ -52,7 +52,7 @@ public class User implements Serializable{
 	}
 
 	@ManyToOne (cascade=CascadeType.ALL)
-	@JoinColumn(name = "role_id")
+	@JoinColumn(name = "role")
 	private Role role;
 	
 	public String getfName() {

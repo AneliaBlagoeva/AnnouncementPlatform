@@ -14,7 +14,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,12 +42,12 @@ public class AuthController {
     @Autowired
     private CustomUserDetailsService userService;
 
-    @RequestMapping (value="/login", produces="application/json", method= {RequestMethod.POST, RequestMethod.GET})
-    public ResponseEntity login(@RequestBody AuthBody data) {
+    @RequestMapping(value = "/login", produces = "application/json", method = { RequestMethod.POST, RequestMethod.GET })
+    public ResponseEntity<Map<Object, Object>> login(@RequestBody AuthBody data) {
         try {
             String username = data.getEmail();
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
-            Set<Role> roles=new HashSet<Role>();
+            Set<Role> roles = new HashSet<Role>();
             roles.add(this.users.findByEmail(username).getRole());
             String token = jwtTokenProvider.createToken(username, roles);
             Map<Object, Object> model = new HashMap<>();
@@ -61,8 +60,8 @@ public class AuthController {
     }
 
     @SuppressWarnings("rawtypes")
-    @RequestMapping (value="/register", produces="application/json", method= RequestMethod.POST)
-    @CrossOrigin(origins = "http://localhost:4200", allowedHeaders="*")
+    @RequestMapping(value = "/register", produces = "application/json", method = RequestMethod.POST)
+    @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
     public ResponseEntity register(@RequestBody User user) {
         User userExists = userService.findUserByEmail(user.getEmail());
         if (userExists != null) {
@@ -74,4 +73,3 @@ public class AuthController {
         return ok(model);
     }
 }
-

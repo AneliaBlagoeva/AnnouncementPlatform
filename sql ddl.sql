@@ -41,9 +41,8 @@ CREATE TABLE `job` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `role` (
-  `idrole` int(11) NOT NULL,
   `description` varchar(45) NOT NULL,
-  PRIMARY KEY (`idrole`)
+  PRIMARY KEY (`description`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `scholarship` (
@@ -67,11 +66,11 @@ CREATE TABLE `user` (
   `city` varchar(45) DEFAULT NULL,
   `phone` char(10) DEFAULT NULL,
   `country` varchar(45) DEFAULT NULL,
-  `role_id` int(11) NOT NULL,
+  `role` varchar(45) DEFAULT NULL,
   `password` varchar(256) NOT NULL,
   PRIMARY KEY (`email`),
-  KEY `role_idx` (`role_id`),
-  CONSTRAINT `role` FOREIGN KEY (`role_id`) REFERENCES `role` (`idrole`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `role_idx` (`role`),
+  CONSTRAINT `role` FOREIGN KEY (`role`) REFERENCES `role` (`description`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `userjobattributes` (
