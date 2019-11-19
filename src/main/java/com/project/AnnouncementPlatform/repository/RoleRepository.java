@@ -9,5 +9,5 @@ import com.project.AnnouncementPlatform.domain.Role;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, String> {
-	Optional<Role> findById(String roleDescription);
+	Optional<Role> findById (String roleDescription);
 }

@@ -48,7 +48,7 @@ public class UserController {
 	
 	@DeleteMapping("/user/{email}")
 	@CrossOrigin(origins = "http://localhost:4200")
-	    public ResponseEntity<User> delete(@PathVariable String email) {
+	    public ResponseEntity<User> delete(@PathVariable("email") String email) {
 	        if (!userService.findById(email).isPresent()) {
 	            ResponseEntity.badRequest().build();
 	        }

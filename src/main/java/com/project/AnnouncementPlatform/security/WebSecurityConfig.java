@@ -44,7 +44,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // .authorizeRequests().anyRequest().permitAll()
                 .authorizeRequests().antMatchers("/api/auth/**").permitAll()
                 // .antMatchers("/api/userJobAttributes").permitAll()
-                .antMatchers("/api/userJobAttributes").hasAuthority("ADMIN").anyRequest().authenticated().and()
+                .antMatchers("/api/userJobAttributes").hasAuthority("ADMIN").antMatchers("/api/userAttributes")
+                .hasAuthority("ADMIN").antMatchers("/api/userVolunteerAttributes").hasAuthority("ADMIN")
+                .antMatchers("/api/userSchoralshipAttributes").hasAuthority("ADMIN").anyRequest().authenticated().and()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint()).and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .apply(new JwtConfigurer(jwtTokenProvider));
