@@ -51,6 +51,7 @@ public class AuthController {
             roles.add(this.users.findByEmail(username).getRole());
             String token = jwtTokenProvider.createToken(username, roles);
             Map<Object, Object> model = new HashMap<>();
+            model.put("role", this.users.findByEmail(username).getRole());
             model.put("username", username);
             model.put("token", token);
             return ok(model);

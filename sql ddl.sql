@@ -70,7 +70,7 @@ CREATE TABLE `user` (
   `password` varchar(256) NOT NULL,
   PRIMARY KEY (`email`),
   KEY `role_idx` (`role`),
-  CONSTRAINT `role` FOREIGN KEY (`role`) REFERENCES `role` (`description`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `role` FOREIGN KEY (`role`) REFERENCES `role` (`description`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `userjobattributes` (
@@ -93,6 +93,12 @@ CREATE TABLE `userschoralshipattributes` (
   CONSTRAINT `userEmail` FOREIGN KEY (`user_email`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+CREATE TABLE `uservolunteerattributes` (
+  `user_email` varchar(45) NOT NULL,
+  PRIMARY KEY (`user_email`),
+  CONSTRAINT `fkEmail` FOREIGN KEY (`user_email`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 CREATE TABLE `version` (
   `version` decimal(1,0) NOT NULL,
   PRIMARY KEY (`version`)
@@ -104,3 +110,4 @@ CREATE TABLE `voluntariness` (
   PRIMARY KEY (`anncmnt_id`),
   CONSTRAINT `vountarinessId` FOREIGN KEY (`anncmnt_id`) REFERENCES `announcement` (`announcement_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+SELECT * FROM announcementplatform.user;
