@@ -1,5 +1,6 @@
 package com.project.AnnouncementPlatform.controller;
 
+import java.io.Console;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,9 +66,17 @@ public class UserController {
 			  method=RequestMethod.PUT)
 	@CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<User> update( @Valid @RequestBody User product) {
-		boolean a=(product==null);
-		System.out.print(a);
-            return ResponseEntity.ok(userService.update(product));
+		//User inDB = userService.update(product);
+		//if(inDB.getfName() == product.getfName())
+		//{
+			return ResponseEntity.ok(userService.update(product));
+		//}
+		//else
+		//{
+		//	return ResponseEntity.badRequest().build();
+		//}
+		//String name=product.getfName();
+            
     }
 	
 

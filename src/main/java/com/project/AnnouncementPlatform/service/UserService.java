@@ -32,9 +32,12 @@ public class UserService {
     }
     
     public User update(User user) {
-    	if (!userRepository.findById(user.getEmail()).isPresent()) {
-            ResponseEntity.badRequest().build();
-        }
-        return userRepository.save(user);
+    	User u=userRepository.findByEmail(user.getEmail());
+    	if (u!=null) {
+    		 userRepository.save(user);
+    	}
+    	
+    	return u;
+       
     }
 }
