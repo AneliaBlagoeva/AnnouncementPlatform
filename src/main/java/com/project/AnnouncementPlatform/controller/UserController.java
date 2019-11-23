@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.AnnouncementPlatform.domain.User;
@@ -58,9 +60,13 @@ public class UserController {
 	        return ResponseEntity.ok().build();
 	    }
 	
-	@PutMapping("/user/{email}")
+	@RequestMapping(value = "/user", 
+			  produces = "application/json", 
+			  method=RequestMethod.PUT)
 	@CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity<User> update(@PathVariable int id, @Valid @RequestBody User product) {
+    public ResponseEntity<User> update( @Valid @RequestBody User product) {
+		boolean a=(product==null);
+		System.out.print(a);
             return ResponseEntity.ok(userService.update(product));
     }
 	
