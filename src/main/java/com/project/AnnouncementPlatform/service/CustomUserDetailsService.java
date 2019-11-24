@@ -37,10 +37,18 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     public void saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        System.out.print(user.getPassword());
 
         // 1 ADMIN in db
         Optional<Role> userRole = roleRepository.findById("USER");
+        user.setRole(userRole.get());
+        userRepository.save(user);
+    }
+    
+    public void saveEdittedUser(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+
+        // 1 ADMIN in db
+        Optional<Role> userRole = roleRepository.findById(user.getRole().getDescription());
         user.setRole(userRole.get());
         userRepository.save(user);
     }

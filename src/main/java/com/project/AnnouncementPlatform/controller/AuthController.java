@@ -73,4 +73,19 @@ public class AuthController {
         model.put("message", "User registered successfully");
         return ok(model);
     }
+    
+    @SuppressWarnings("rawtypes")
+    @RequestMapping(value = "/changePass", produces = "application/json", method = RequestMethod.POST)
+    @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+    public ResponseEntity changePass(@RequestBody AuthBody user) {
+        User userExists = userService.findUserByEmail(user.getEmail());
+        if (userExists == null) {
+            throw new BadCredentialsException("User with username: " + user.getEmail() + " does not exists");
+        }
+        userExists.setPassword(user.getPassword());
+        userService.saveEdittedUser(userExists);
+        Map<Object, Object> model = new HashMap<>();
+        model.put("message", "User changed password successfully");
+        return ok(model);
+    }
 }
