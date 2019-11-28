@@ -46,25 +46,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 // .authorizeRequests().anyRequest().permitAll()
-                .authorizeRequests().antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/api/announcements").permitAll()
+                .authorizeRequests().antMatchers("/api/auth/**").permitAll().antMatchers("/api/announcements")
+                .permitAll().antMatchers("/api/userJobAttributes").permitAll()
                 // .antMatchers("/api/userJobAttributes").permitAll()
-                .antMatchers("/api/userJobAttributes").hasAuthority("ADMIN").antMatchers("/api/userAttributes")
-                .hasAuthority("ADMIN").antMatchers("/api/userVolunteerAttributes").hasAuthority("ADMIN")
-                .antMatchers("/api/userSchoralshipAttributes").hasAuthority("ADMIN").anyRequest().authenticated().and()
-                .exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint()).and().sessionManagement()
+                // .antMatchers("/api/userJobAttributes").hasAuthority("ADMIN")
+                // .antMatchers("/api/userAttributes").hasAuthority("ADMIN")
+                // .antMatchers("/api/userVolunteerAttributes").hasAuthority("ADMIN")
+                // .antMatchers("/api/userSchoralshipAttributes").hasAuthority("ADMIN")
+                .anyRequest().authenticated().and().exceptionHandling()
+                .authenticationEntryPoint(unauthorizedEntryPoint()).and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .apply(new JwtConfigurer(jwtTokenProvider));
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
-
-
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**");
     }
-    
+
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -80,7 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
-    
+
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
