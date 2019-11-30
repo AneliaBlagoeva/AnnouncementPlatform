@@ -11,8 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="user")
-public class User implements Serializable{
+@Table(name = "user")
+public class User implements Serializable {
 
 	/**
 	 * 
@@ -20,69 +20,78 @@ public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="email")
+	@Column(name = "email")
 	private String email;
-	
-	@Column(name="first_name")
+
+	@Column(name = "first_name")
 	private String fName;
 
-	@Column(name="last_name")
+	@Column(name = "last_name")
 	private String lName;
-	
-	@Column(name="age")
+
+	@Column(name = "age")
 	private int age;
-	
-	@Column(name="city")
+
+	@Column(name = "city")
 	private String city;
-	
-	@Column(name="phone")
+
+	@Column(name = "phone")
 	private String phone;
 
-	@Column(name="country")
+	@Column(name = "country")
 	private String country;
-	
-	@Column(name="password")
+
+	@Column(name = "password")
 	private String password;
-	
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	@ManyToOne (cascade=CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name = "role")
 	private Role role;
-	
+
 	public String getfName() {
 		return fName;
 	}
+
 	public void setfName(String fName) {
 		this.fName = fName;
 	}
+
 	public String getlName() {
 		return lName;
 	}
+
 	public void setlName(String lName) {
 		this.lName = lName;
 	}
+
 	public Role getRole() {
 		return role;
 	}
+
 	public void setRole(Role role) {
 		this.role = role;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public int getAge() {
 		return age;
 	}
+
 	public void setAge(int age) {
 		this.age = age;
 	}
@@ -90,6 +99,7 @@ public class User implements Serializable{
 	public String getPhone() {
 		return phone;
 	}
+
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
@@ -97,6 +107,7 @@ public class User implements Serializable{
 	public String getCity() {
 		return city;
 	}
+
 	public void setCity(String city) {
 		this.city = city;
 	}
@@ -104,6 +115,7 @@ public class User implements Serializable{
 	public String getCountry() {
 		return country;
 	}
+
 	public void setCountry(String country) {
 		this.country = country;
 	}
@@ -112,6 +124,5 @@ public class User implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
 
 }

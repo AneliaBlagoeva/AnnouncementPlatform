@@ -11,9 +11,9 @@ CREATE TABLE `announcement` (
   KEY `categoryId_idx` (`anncmnt_category_id`),
   KEY `statusId_idx` (`status_id`),
   KEY `email_idx` (`user_email`),
-  CONSTRAINT `category_id` FOREIGN KEY (`anncmnt_category_id`) REFERENCES `announcementcategory` (`category_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `email` FOREIGN KEY (`user_email`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `status_id` FOREIGN KEY (`status_id`) REFERENCES `announcementstatus` (`status_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `category_id` FOREIGN KEY (`anncmnt_category_id`) REFERENCES `announcementcategory` (`category_id`),
+  CONSTRAINT `email` FOREIGN KEY (`user_email`) REFERENCES `user` (`email`),
+  CONSTRAINT `status_id` FOREIGN KEY (`status_id`) REFERENCES `announcementstatus` (`status_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `announcementcategory` (
@@ -110,4 +110,3 @@ CREATE TABLE `voluntariness` (
   PRIMARY KEY (`anncmnt_id`),
   CONSTRAINT `vountarinessId` FOREIGN KEY (`anncmnt_id`) REFERENCES `announcement` (`announcement_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-SELECT * FROM announcementplatform.user;
