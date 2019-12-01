@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.AnnouncementPlatform.domain.Scholarship;
@@ -58,9 +59,9 @@ public class ScholarshipController {
 	        return ResponseEntity.ok().build();
 	    }
 	
-	@PutMapping("/scholarship/{id}")
+	@RequestMapping(value = "/scholarship", produces = "application/json", method = RequestMethod.PUT)
 	@CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity<Scholarship> update(@PathVariable int id, @Valid @RequestBody Scholarship product) {
+    public ResponseEntity<Scholarship> update(@Valid @RequestBody Scholarship product) {
             return ResponseEntity.ok(scholarshipService.update(product));
     }
 	
