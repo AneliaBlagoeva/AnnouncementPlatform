@@ -58,9 +58,9 @@ public class VoluntarinessController {
 	        return ResponseEntity.ok().build();
 	    }
 	
-	@PutMapping("/voluntariness/{id}")
+	@PutMapping("/voluntariness")
 	@CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity<Voluntariness> update(@PathVariable int id, @Valid @RequestBody Voluntariness product) {
+    public ResponseEntity<Voluntariness> update(@Valid @RequestBody Voluntariness product) {
             return ResponseEntity.ok(voluntarinessService.update(product));
     }
 	
