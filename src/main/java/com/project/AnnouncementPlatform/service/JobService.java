@@ -12,27 +12,32 @@ import com.project.AnnouncementPlatform.repository.JobRepository;
 
 @Service
 public class JobService {
-	@Autowired
+    @Autowired
     private JobRepository jobRepository;
-	
-	public List<Job> findAll() {
+
+    public List<Job> findAll() {
         return jobRepository.findAll();
     }
-    
+
     public Optional<Job> findById(int id) {
-        return jobRepository.findById(id);
+        Optional<Job> result = jobRepository.findById(id);
+        if (!result.isPresent()) {
+            return result;
+        } else {
+            return null;
+        }
     }
-    
+
     public void deleteById(int id) {
-    	jobRepository.deleteById(id);
+        jobRepository.deleteById(id);
     }
-    
+
     public Job save(Job job) {
         return jobRepository.save(job);
     }
-    
+
     public Job update(Job job) {
-    	if (!jobRepository.findById(job.getAnncmntID()).isPresent()) {
+        if (!jobRepository.findById(job.getAnncmntID()).isPresent()) {
             ResponseEntity.badRequest().build();
         }
         return jobRepository.save(job);

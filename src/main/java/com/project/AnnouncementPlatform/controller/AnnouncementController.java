@@ -40,6 +40,12 @@ public class AnnouncementController {
 		return ResponseEntity.ok(announcement.get());
 	}
 
+	@GetMapping("/announcement/email/{email}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<Optional<List<Announcement>>> getAnnouncementByUser(@PathVariable("email") String email) {
+		return ResponseEntity.ok(announcementService.findByUserEmail(email));
+	}
+
 	@PostMapping("/announcement")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<Announcement> create(@Valid @RequestBody Announcement announcement) {

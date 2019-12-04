@@ -17,52 +17,56 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.AnnouncementPlatform.domain.Job;
 import com.project.AnnouncementPlatform.domain.Voluntariness;
 import com.project.AnnouncementPlatform.service.VoluntarinessService;
 
 @RestController
 @RequestMapping("/api")
 public class VoluntarinessController {
-	
+
 	@Autowired
 	private VoluntarinessService voluntarinessService;
-	
+
 	@GetMapping("/voluntarinesses")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<List<Voluntariness>> getVoluntarinesses() {
-        return ResponseEntity.ok(voluntarinessService.findAll());
-    }
-			
+		return ResponseEntity.ok(voluntarinessService.findAll());
+	}
+
 	@GetMapping("/voluntariness/{id}")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<Voluntariness> getVoluntarinessById(@PathVariable int id) {
-		Optional<Voluntariness> voluntariness=voluntarinessService.findById(id);
-        return ResponseEntity.ok(voluntariness.get());
-    }
-	
+	public ResponseEntity<Voluntariness> getVoluntarinessById(@PathVariable("id") int id) {
+		Optional<Voluntariness> voluntariness = voluntarinessService.findById(id);
+		if (voluntariness != null) {
+			return ResponseEntity.ok(voluntariness.get());
+		} else {
+			return null;
+		}
+	}
+
 	@PostMapping("/voluntariness")
 	@CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity<Voluntariness> create(@Valid @RequestBody Voluntariness voluntariness) {
-        return ResponseEntity.ok(voluntarinessService.save(voluntariness));
-    }
-	
+	public ResponseEntity<Voluntariness> create(@Valid @RequestBody Voluntariness voluntariness) {
+		return ResponseEntity.ok(voluntarinessService.save(voluntariness));
+	}
+
 	@DeleteMapping("/voluntariness/{id}")
 	@CrossOrigin(origins = "http://localhost:4200")
-	    public ResponseEntity<Voluntariness> delete(@PathVariable int id) {
-	        if (!voluntarinessService.findById(id).isPresent()) {
-	            ResponseEntity.badRequest().build();
-	        }
+	public ResponseEntity<Voluntariness> delete(@PathVariable int id) {
+		if (!voluntarinessService.findById(id).isPresent()) {
+			ResponseEntity.badRequest().build();
+		}
 
-	        voluntarinessService.deleteById(id);
+		voluntarinessService.deleteById(id);
 
-	        return ResponseEntity.ok().build();
-	    }
-	
+		return ResponseEntity.ok().build();
+	}
+
 	@PutMapping("/voluntariness")
 	@CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity<Voluntariness> update(@Valid @RequestBody Voluntariness product) {
-            return ResponseEntity.ok(voluntarinessService.update(product));
-    }
-	
+	public ResponseEntity<Voluntariness> update(@Valid @RequestBody Voluntariness product) {
+		return ResponseEntity.ok(voluntarinessService.update(product));
+	}
 
 }

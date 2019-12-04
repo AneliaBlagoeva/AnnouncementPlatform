@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.project.AnnouncementPlatform.domain.Job;
 import com.project.AnnouncementPlatform.domain.Voluntariness;
 import com.project.AnnouncementPlatform.repository.VoluntarinessRepository;
 
@@ -20,7 +21,12 @@ public class VoluntarinessService {
     }
     
     public Optional<Voluntariness> findById(int id) {
-        return voluntarinessRepository.findById(id);
+    	Optional<Voluntariness> result = voluntarinessRepository.findById(id);
+        if (!result.isPresent()) {
+            return result;
+        } else {
+            return null;
+        }
     }
     
     public void deleteById(int id) {

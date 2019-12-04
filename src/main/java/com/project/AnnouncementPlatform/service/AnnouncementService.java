@@ -12,29 +12,33 @@ import com.project.AnnouncementPlatform.repository.AnnouncementRepository;
 
 @Service
 public class AnnouncementService {
-	@Autowired
+    @Autowired
     private AnnouncementRepository announcementRepository;
-	
-	public List<Announcement> findAll() {
+
+    public List<Announcement> findAll() {
         return announcementRepository.findAll();
     }
-    
+
     public Optional<Announcement> findById(int id) {
         return announcementRepository.findById(id);
     }
-    
+
     public void deleteById(int id) {
-    	announcementRepository.deleteById(id);
+        announcementRepository.deleteById(id);
     }
-    
+
     public Announcement save(Announcement announcement) {
-        return announcementRepository.save(announcement);
+        return announcementRepository.saveAndFlush(announcement);
     }
-    
+
     public Announcement update(Announcement announcement) {
-    	if (!announcementRepository.findById(announcement.getAnncmntId()).isPresent()) {
+        if (!announcementRepository.findById(announcement.getAnncmntId()).isPresent()) {
             ResponseEntity.badRequest().build();
         }
         return announcementRepository.save(announcement);
+    }
+
+    public Optional<List<Announcement>> findByUserEmail(String email) {
+        return announcementRepository.findByUserEmail(email);
     }
 }

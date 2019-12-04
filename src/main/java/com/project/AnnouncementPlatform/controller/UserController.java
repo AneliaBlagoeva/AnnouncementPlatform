@@ -23,50 +23,47 @@ import com.project.AnnouncementPlatform.service.UserService;
 @RestController
 @RequestMapping("/api")
 public class UserController {
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@GetMapping("/users")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<List<User>> getUsers() {
-        return ResponseEntity.ok(userService.findAll());
-    }
-			
+		return ResponseEntity.ok(userService.findAll());
+	}
+
 	@GetMapping("/user/{email}")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<User> getUserByEmail(@PathVariable("email") String email) {
-		Optional<User> user=userService.findById(email);
-        return ResponseEntity.ok(user.get());
-    }
-	
+		Optional<User> user = userService.findById(email);
+		return ResponseEntity.ok(user.get());
+	}
+
 	@PostMapping("/user")
 	@CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity<User> create(@Valid @RequestBody User user) {
-        return ResponseEntity.ok(userService.save(user));
-    }
-	
+	public ResponseEntity<User> create(@Valid @RequestBody User user) {
+		return ResponseEntity.ok(userService.save(user));
+	}
+
 	@DeleteMapping("/user/{email}")
 	@CrossOrigin(origins = "http://localhost:4200")
-	    public ResponseEntity<User> delete(@PathVariable("email") String email) {
-	        if (!userService.findById(email).isPresent()) {
-	            ResponseEntity.badRequest().build();
-	        }
+	public ResponseEntity<User> delete(@PathVariable("email") String email) {
+		if (!userService.findById(email).isPresent()) {
+			ResponseEntity.badRequest().build();
+		}
 
-	        userService.deleteById(email);
+		userService.deleteById(email);
 
-	        return ResponseEntity.ok().build();
-	    }
-	
-	@RequestMapping(value = "/user", 
-			  produces = "application/json", 
-			  method=RequestMethod.PUT)
+		return ResponseEntity.ok().build();
+	}
+
+	@RequestMapping(value = "/user", produces = "application/json", method = RequestMethod.PUT)
 	@CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity<User> update( @Valid @RequestBody User product) {
+	public ResponseEntity<User> update(@Valid @RequestBody User product) {
 
-			return ResponseEntity.ok(userService.update(product));
-            
-    }
-	
+		return ResponseEntity.ok(userService.update(product));
+
+	}
 
 }

@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,6 +24,7 @@ public class Announcement implements Serializable {
 
 	@Id
 	@Column(name = "announcement_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int anncmntId;
 
 	@Column(name = "anncmnt_name")
@@ -47,11 +50,11 @@ public class Announcement implements Serializable {
 	@Column(name = "user_email")
 	private String userEmail;
 
-	public int getAnncmntId() {
+	public Integer getAnncmntId() {
 		return anncmntId;
 	}
 
-	public void setAnncmntId(int anncmntId) {
+	public void setAnncmntId(Integer anncmntId) {
 		this.anncmntId = anncmntId;
 	}
 

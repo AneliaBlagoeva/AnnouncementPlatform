@@ -20,7 +20,12 @@ public class ScholarshipService {
     }
     
     public Optional<Scholarship> findById(int id) {
-        return scholarshipRepository.findById(id);
+    	Optional<Scholarship> result= scholarshipRepository.findById(id);
+    	if (!result.isPresent()) {
+            return result;
+        } else {
+            return null;
+        }
     }
     
     public void deleteById(int id) {
