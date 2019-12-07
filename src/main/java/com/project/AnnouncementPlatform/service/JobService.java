@@ -21,7 +21,7 @@ public class JobService {
 
     public Optional<Job> findById(int id) {
         Optional<Job> result = jobRepository.findById(id);
-        if (!result.isPresent()) {
+        if (result.isPresent()) {
             return result;
         } else {
             return null;

@@ -12,32 +12,32 @@ import com.project.AnnouncementPlatform.repository.ScholarshipRepository;
 
 @Service
 public class ScholarshipService {
-	@Autowired
+    @Autowired
     private ScholarshipRepository scholarshipRepository;
-	
-	public List<Scholarship> findAll() {
+
+    public List<Scholarship> findAll() {
         return scholarshipRepository.findAll();
     }
-    
+
     public Optional<Scholarship> findById(int id) {
-    	Optional<Scholarship> result= scholarshipRepository.findById(id);
-    	if (!result.isPresent()) {
+        Optional<Scholarship> result = scholarshipRepository.findById(id);
+        if (result.isPresent()) {
             return result;
         } else {
             return null;
         }
     }
-    
+
     public void deleteById(int id) {
-    	scholarshipRepository.deleteById(id);
+        scholarshipRepository.deleteById(id);
     }
-    
+
     public Scholarship save(Scholarship scholarship) {
         return scholarshipRepository.save(scholarship);
     }
-    
+
     public Scholarship update(Scholarship scholarship) {
-    	if (!scholarshipRepository.findById(scholarship.getAnncmntID()).isPresent()) {
+        if (!scholarshipRepository.findById(scholarship.getAnncmntID()).isPresent()) {
             ResponseEntity.badRequest().build();
         }
         return scholarshipRepository.save(scholarship);
