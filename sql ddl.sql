@@ -1,3 +1,37 @@
+use announcementplatform;
+
+CREATE TABLE `role` (
+  `description` varchar(45) NOT NULL,
+  PRIMARY KEY (`description`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `user` (
+  `first_name` varchar(45) NOT NULL,
+  `last_name` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `age` smallint(99) DEFAULT NULL,
+  `city` varchar(45) DEFAULT NULL,
+  `phone` char(10) DEFAULT NULL,
+  `country` varchar(45) DEFAULT NULL,
+  `role` varchar(45) DEFAULT NULL,
+  `password` varchar(256) NOT NULL,
+  PRIMARY KEY (`email`),
+  KEY `role_idx` (`role`),
+  CONSTRAINT `roleFk` FOREIGN KEY (`role`) REFERENCES `role` (`description`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `announcementcategory` (
+  `category_id` int(11) NOT NULL,
+  `category_name` varchar(45) NOT NULL,
+  PRIMARY KEY (`category_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `announcementstatus` (
+  `status_id` int(11) NOT NULL,
+  `status_name` varchar(45) NOT NULL,
+  PRIMARY KEY (`status_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE `announcement` (
   `announcement_id` int(11) NOT NULL AUTO_INCREMENT,
   `anncmnt_name` varchar(45) NOT NULL,
@@ -16,18 +50,6 @@ CREATE TABLE `announcement` (
   CONSTRAINT `status_id` FOREIGN KEY (`status_id`) REFERENCES `announcementstatus` (`status_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
-CREATE TABLE `announcementcategory` (
-  `category_id` int(11) NOT NULL,
-  `category_name` varchar(45) NOT NULL,
-  PRIMARY KEY (`category_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-CREATE TABLE `announcementstatus` (
-  `status_id` int(11) NOT NULL,
-  `status_name` varchar(45) NOT NULL,
-  PRIMARY KEY (`status_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 CREATE TABLE `job` (
   `anncmnt_id` int(11) NOT NULL,
   `anncmnt_organization` varchar(45) DEFAULT NULL,
@@ -38,11 +60,6 @@ CREATE TABLE `job` (
   `requirements` varchar(5000) DEFAULT NULL,
   KEY `jobId_idx` (`anncmnt_id`),
   CONSTRAINT `jobId` FOREIGN KEY (`anncmnt_id`) REFERENCES `announcement` (`announcement_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-CREATE TABLE `role` (
-  `description` varchar(45) NOT NULL,
-  PRIMARY KEY (`description`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `scholarship` (
@@ -58,19 +75,11 @@ CREATE TABLE `scholarship` (
   CONSTRAINT `scholarshipId` FOREIGN KEY (`anncmnt_id`) REFERENCES `announcement` (`announcement_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `user` (
-  `first_name` varchar(45) NOT NULL,
-  `last_name` varchar(45) NOT NULL,
-  `email` varchar(45) NOT NULL,
-  `age` smallint(99) DEFAULT NULL,
-  `city` varchar(45) DEFAULT NULL,
-  `phone` char(10) DEFAULT NULL,
-  `country` varchar(45) DEFAULT NULL,
-  `role` varchar(45) DEFAULT NULL,
-  `password` varchar(256) NOT NULL,
-  PRIMARY KEY (`email`),
-  KEY `role_idx` (`role`),
-  CONSTRAINT `roleFk` FOREIGN KEY (`role`) REFERENCES `role` (`description`) ON DELETE NO ACTION ON UPDATE NO ACTION
+CREATE TABLE `voluntariness` (
+  `anncmnt_id` int(11) NOT NULL,
+  `anncmnt_organization` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`anncmnt_id`),
+  CONSTRAINT `voluntarinessId` FOREIGN KEY (`anncmnt_id`) REFERENCES `announcement` (`announcement_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `userjobattributes` (
@@ -98,11 +107,3 @@ CREATE TABLE `uservolunteerattributes` (
   PRIMARY KEY (`user_email`),
   CONSTRAINT `fkEmail` FOREIGN KEY (`user_email`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-CREATE TABLE `voluntariness` (
-  `anncmnt_id` int(11) NOT NULL,
-  `anncmnt_organization` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`anncmnt_id`),
-  CONSTRAINT `voluntarinessId` FOREIGN KEY (`anncmnt_id`) REFERENCES `announcement` (`announcement_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-SELECT * FROM announcementplatform.job;
