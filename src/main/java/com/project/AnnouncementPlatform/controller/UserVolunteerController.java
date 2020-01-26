@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.AnnouncementPlatform.domain.UserVolunteerAttributes;
@@ -37,7 +38,11 @@ public class UserVolunteerController {
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<UserVolunteerAttributes> getUserVolunteerAttributesByEmail(@PathVariable String email) {
         Optional<UserVolunteerAttributes> userVolunteerAttributes = userVolunteerAttributesService.findById(email);
-        return ResponseEntity.ok(userVolunteerAttributes.get());
+        if (userVolunteerAttributes.isPresent()) {
+            return ResponseEntity.ok(userVolunteerAttributes.get());
+        } else {
+            return ResponseEntity.ok(new UserVolunteerAttributes());
+        }
     }
 
     @PostMapping("/userVolunteerAttributes")
@@ -59,7 +64,7 @@ public class UserVolunteerController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/userVolunteerAttributes/{email}")
+    @RequestMapping(value = "/userVolunteerAttributes", produces = "application/json", method = RequestMethod.PUT)
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<UserVolunteerAttributes> update(@PathVariable String email,
             @Valid @RequestBody UserVolunteerAttributes product) {

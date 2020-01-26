@@ -1,7 +1,6 @@
 package com.project.AnnouncementPlatform.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,9 +16,6 @@ import javax.persistence.Table;
 @Table(name = "announcement")
 public class Announcement implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -44,8 +40,8 @@ public class Announcement implements Serializable {
 	@Column(name = "url")
 	private String url;
 
-	@Column(name = "date_created")
-	private Date dateCreated;
+	@Column(name = "date_validity")
+	private java.sql.Date dateCreated;
 
 	@Column(name = "user_email")
 	private String userEmail;
@@ -90,11 +86,11 @@ public class Announcement implements Serializable {
 		this.url = url;
 	}
 
-	public Date getDateCreated() {
+	public java.sql.Date getDateCreated() {
 		return dateCreated;
 	}
 
-	public void setDateCreated(Date dateCreated) {
+	public void setDateCreated(java.sql.Date dateCreated) {
 		this.dateCreated = dateCreated;
 	}
 
@@ -120,7 +116,7 @@ public class Announcement implements Serializable {
 	}
 
 	public Announcement(int anncmntId, String anncmntName, AnnouncementStatus status, AnnouncementCategory category,
-			String description, String url, Date dateCreated, String userEmail) {
+			String description, String url, java.sql.Date dateCreated, String userEmail) {
 		super();
 		this.anncmntId = anncmntId;
 		this.anncmntName = anncmntName;

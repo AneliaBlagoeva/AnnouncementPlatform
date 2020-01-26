@@ -12,18 +12,18 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="job")
+@Table(name = "job")
 public class Job implements Serializable {
-/**
-	 * 
-	 */
+	/**
+		 * 
+		 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="anncmnt_id")
+	@Column(name = "anncmnt_id")
 	private int anncmntID;
-	
-    public int getAnncmntID() {
+
+	public int getAnncmntID() {
 		return anncmntID;
 	}
 
@@ -32,10 +32,10 @@ public class Job implements Serializable {
 	}
 
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "anncmnt_id")
-    @MapsId
+	@JoinColumn(name = "anncmnt_id")
+	@MapsId
 	private Announcement anncmnt;
-	
+
 	public Announcement getAnncmnt() {
 		return anncmnt;
 	}
@@ -44,22 +44,22 @@ public class Job implements Serializable {
 		this.anncmnt = anncmnt;
 	}
 
-	@Column(name="anncmnt_organization")
+	@Column(name = "anncmnt_organization")
 	private String anncmntOrganization;
-	
-	@Column(name="candidate_responsibility")
+
+	@Column(name = "candidate_responsibility")
 	private String candidateResponsibility;
-	
-	@Column(name="salary")
-	private int salary;
-	
-	@Column(name="experience")
+
+	@Column(name = "salary")
+	private String salary;
+
+	@Column(name = "experience")
 	private int experiance;
-	
-	@Column(name="benefits")
+
+	@Column(name = "benefits")
 	private String benefits;
-	
-	@Column(name="requirements")
+
+	@Column(name = "requirements")
 	private String requirements;
 
 	public String getAnncmntOrganization() {
@@ -78,11 +78,11 @@ public class Job implements Serializable {
 		this.candidateResponsibility = candidateResponsibility;
 	}
 
-	public int getSalary() {
+	public String getSalary() {
 		return salary;
 	}
 
-	public void setSalary(int salary) {
+	public void setSalary(String salary) {
 		this.salary = salary;
 	}
 

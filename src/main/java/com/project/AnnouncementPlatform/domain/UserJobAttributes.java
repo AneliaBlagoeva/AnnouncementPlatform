@@ -21,7 +21,7 @@ public class UserJobAttributes implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="user_email")
+	@Column(name = "user_email")
 	private String email;
 
 	public String getEmail() {
@@ -69,6 +69,16 @@ public class UserJobAttributes implements Serializable {
 
 	public void setSkills(String skills) {
 		this.skills = skills;
+	}
+
+	public UserJobAttributes() {
+	}
+
+	public UserJobAttributes(String email, User user, String skills, int experience) {
+		this.email = email;
+		this.user = user;
+		this.skills = skills;
+		this.experience = experience;
 	}
 
 }

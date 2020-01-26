@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -36,19 +37,20 @@ public class Scholarship implements Serializable {
 
 	@Column(name = "requirements")
 	private String requirements;
-	
+
 	@Column(name = "program_allowed")
 	private String programAllowed;
-	
+
 	@Column(name = "university_allowed")
 	private String universityAllowed;
-	
+
 	@Column(name = "year_allowed")
 	private int yearAllowed;
-	
-	@Column(name = "degree_allowed")
-	private String degreeAllowed;
-	
+
+	@ManyToOne(cascade = CascadeType.DETACH)
+	@JoinColumn(name = "degree_allowed")
+	private Degree degreeAllowed;
+
 	public int getAnncmntID() {
 		return anncmntID;
 	}
@@ -65,11 +67,11 @@ public class Scholarship implements Serializable {
 		this.yearAllowed = yearAllowed;
 	}
 
-	public String getDegreeAllowed() {
+	public Degree getDegreeAllowed() {
 		return degreeAllowed;
 	}
 
-	public void setDegreeAllowed(String degreeAllowed) {
+	public void setDegreeAllowed(Degree degreeAllowed) {
 		this.degreeAllowed = degreeAllowed;
 	}
 

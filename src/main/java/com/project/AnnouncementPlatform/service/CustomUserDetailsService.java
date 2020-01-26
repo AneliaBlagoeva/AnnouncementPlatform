@@ -38,17 +38,16 @@ public class CustomUserDetailsService implements UserDetailsService {
     public void saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
-        // 1 ADMIN in db
-        Optional<Role> userRole = roleRepository.findById("USER");
+        Optional<Role> userRole = roleRepository.findById(2);
         user.setRole(userRole.get());
         userRepository.save(user);
     }
-    
+
     public void saveEdittedUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
-        // 1 ADMIN in db
-        Optional<Role> userRole = roleRepository.findById(user.getRole().getDescription());
+        // 2 USER in db
+        Optional<Role> userRole = roleRepository.findById(user.getRole().getId());
         user.setRole(userRole.get());
         userRepository.save(user);
     }
@@ -61,7 +60,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             List<GrantedAuthority> authorities = getUserAuthority(user.getRole());
             return buildUserForAuthentication(user, authorities);
         } else {
-            throw new UsernameNotFoundException("username not found");
+            throw new UsernameNotFoundException("Username " + email + " not found");
         }
     }
 

@@ -10,6 +10,17 @@ import javax.persistence.Table;
 public class Role {
 
 	@Id
+	@Column(name = "id")
+	private int id;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	@Column(name = "description")
 	private String description;
 

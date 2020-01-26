@@ -29,9 +29,6 @@ public class User implements Serializable {
 	@Column(name = "last_name")
 	private String lName;
 
-	@Column(name = "age")
-	private int age;
-
 	@Column(name = "city")
 	private String city;
 
@@ -86,14 +83,6 @@ public class User implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
 	}
 
 	public String getPhone() {
