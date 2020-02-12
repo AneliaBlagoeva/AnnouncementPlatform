@@ -1,4 +1,4 @@
-use announcementplatform;
+CREATE DATABASE `announcementplatform` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
 CREATE TABLE `role` (
   `description` varchar(45) NOT NULL,
@@ -107,3 +107,43 @@ CREATE TABLE `uservolunteerattributes` (
   PRIMARY KEY (`user_email`),
   CONSTRAINT `fkEmail` FOREIGN KEY (`user_email`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `announcementplatform`.`announcementcategory`
+(`category_id`,`category_name`) VALUES
+(1, 'Job');
+
+INSERT INTO `announcementplatform`.`announcementcategory`
+(`category_id`,`category_name`) VALUES
+(2, 'Scholarship');
+
+INSERT INTO `announcementplatform`.`announcementcategory`
+(`category_id`,`category_name`) VALUES
+(3, 'Voluntariness');
+
+INSERT INTO `announcementplatform`.`announcementstatus`
+(`status_id`,`status_name`) VALUES
+(1,'Active');
+
+INSERT INTO `announcementplatform`.`announcementstatus`
+(`status_id`,`status_name`) VALUES
+(2,'Inactive');
+
+INSERT INTO `announcementplatform`.`degree`
+(`iddegree`,`degree_description`) VALUES
+(1,'Bachelor');
+
+INSERT INTO `announcementplatform`.`degree`
+(`iddegree`,`degree_description`) VALUES 
+(2,'Master');
+
+INSERT INTO `announcementplatform`.`degree`
+(`iddegree`,`degree_description`) VALUES 
+(3,'Doctor');
+
+INSERT INTO `announcementplatform`.`role`
+(`description`, `id`) VALUES
+('ADMIN',1);
+
+INSERT INTO `announcementplatform`.`role`
+(`description`, `id`) VALUES
+('USER',2);
