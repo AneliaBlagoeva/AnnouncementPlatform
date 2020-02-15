@@ -66,14 +66,16 @@ public class AuthController {
     public ResponseEntity register(@RequestBody User user) {
         User userExists = userService.findUserByEmail(user.getEmail());
         if (userExists != null) {
-            throw new BadCredentialsException("User with username: " + user.getEmail() + " already exists");
+            Map<Object, Object> model = new HashMap<>();
+            model.put("message", "User already exists!");
+            return ok(model);
         }
         userService.saveUser(user);
         Map<Object, Object> model = new HashMap<>();
-        model.put("message", "User registered successfully");
+        model.put("message", "Successful registration!");
         return ok(model);
     }
-    
+
     @SuppressWarnings("rawtypes")
     @RequestMapping(value = "/changePass", produces = "application/json", method = RequestMethod.POST)
     @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
